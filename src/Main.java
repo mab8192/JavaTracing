@@ -1,6 +1,5 @@
 import com.mab8192.rt.*;
 
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class Main {

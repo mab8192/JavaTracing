@@ -1,11 +1,10 @@
 package com.mab8192.rt;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class PPMImage {
-    private StringBuffer contents;
+    private final StringBuffer contents;
 
     public PPMImage(int width, int height) {
         this.contents = new StringBuffer();
