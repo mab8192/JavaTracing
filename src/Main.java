@@ -16,13 +16,14 @@ public class Main {
         Vec3 origin = new Vec3();
         Vec3 horizontal = new Vec3(viewportWidth, 0, 0);
         Vec3 vertical = new Vec3(0, viewportHeight, 0);
-
         Vec3 lowerLeftCorner = origin.sub(horizontal.div(2)).sub(vertical.div(2)).sub(new Vec3(0, 0, focal_length));
 
-        System.out.println(horizontal);
-        System.out.println(vertical);
-        System.out.println(lowerLeftCorner);
+        // World
+        Scene world = new Scene();
+        world.add(new Sphere(new Vec3(0, 0, -1), 0.5));
+        world.add(new Sphere(new Vec3(0, -100.5, -1), 100));
 
+        // Image
         PPMImage img = new PPMImage(width, height);
 
         for (int j = height-1; j >= 0; j--) {
@@ -31,7 +32,7 @@ public class Main {
                 double u = (double)i/width;
                 double v = (double)j/height;
                 Ray r = new Ray(origin, lowerLeftCorner.add(horizontal.mul(u)).add(vertical.mul(v)).sub(origin));
-                img.writeColor(r.getColor());
+                img.writeColor(r.getColor(world));
             }
         }
 
