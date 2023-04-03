@@ -31,14 +31,6 @@ public class Vec3 {
 
     public Vec3 normalize() {
         double mag = this.magnitude();
-        this.x /= mag;
-        this.y /= mag;
-        this.z /= mag;
-        return this;
-    }
-
-    public Vec3 toUnitVec() {
-        double mag = this.magnitude();
         return new Vec3(x/mag, y/mag, z/mag);
     }
 
@@ -64,6 +56,10 @@ public class Vec3 {
 
     public Vec3 div(double v) {
         return new Vec3(this.x / v, this.y / v, this.z / v);
+    }
+
+    public double dot(Vec3 other) {
+        return this.x*other.x + this.y*other.y + this.z*other.z;
     }
 
     public String toString() {
