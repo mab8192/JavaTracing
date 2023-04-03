@@ -11,10 +11,10 @@ public class PPMImage {
         this.contents.append("P3\n").append(width).append(" ").append(height).append("\n255\n");
     }
 
-    public void writeColor(Vec3 color) {
-        int r = (int)(color.x*255.999);
-        int g = (int)(color.y*255.999);
-        int b = (int)(color.z*255.999);
+    public void writeColor(Vec3 color, int samplesPerPixel) {
+        int r = (int)(color.x*255.999/samplesPerPixel);
+        int g = (int)(color.y*255.999/samplesPerPixel);
+        int b = (int)(color.z*255.999/samplesPerPixel);
         this.contents.append(String.format("%d %d %d\n", r, g, b));
     }
 
