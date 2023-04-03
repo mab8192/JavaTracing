@@ -37,49 +37,36 @@ public class Vec3 {
         return this;
     }
 
+    public Vec3 toUnitVec() {
+        double mag = this.magnitude();
+        return new Vec3(x/mag, y/mag, z/mag);
+    }
+
     public Vec3 add(Vec3 other) {
-        this.x += other.x;
-        this.y += other.y;
-        this.z += other.z;
-        return this;
+        return new Vec3(this.x + other.x, this.y + other.y, this.z + other.z);
     }
 
     public Vec3 sub(Vec3 other) {
-        this.x -= other.x;
-        this.y -= other.y;
-        this.z -= other.z;
-        return this;
+        return new Vec3(this.x - other.x, this.y - other.y, this.z - other.z);
     }
 
     public Vec3 mul(Vec3 other) {
-        this.x *= other.x;
-        this.y *= other.y;
-        this.z *= other.z;
-        return this;
+        return new Vec3(this.x * other.x, this.y * other.y, this.z * other.z);
     }
 
     public Vec3 mul(double v) {
-        this.x *= v;
-        this.y *= v;
-        this.z *= v;
-        return this;
+        return new Vec3(this.x * v, this.y * v, this.z * v);
     }
 
     public Vec3 div(Vec3 other) {
-        this.x /= other.x;
-        this.y /= other.y;
-        this.z /= other.z;
-        return this;
+        return new Vec3(this.x / other.x, this.y / other.y, this.z / other.z);
     }
 
     public Vec3 div(double v) {
-        this.x /= v;
-        this.y /= v;
-        this.z /= v;
-        return this;
+        return new Vec3(this.x / v, this.y / v, this.z / v);
     }
 
     public String toString() {
-        return String.format("%d %d %d", x, y, z);
+        return String.format("%f %f %f", x, y, z);
     }
 }
