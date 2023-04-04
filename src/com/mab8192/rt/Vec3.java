@@ -62,6 +62,14 @@ public class Vec3 {
         return this.x*other.x + this.y*other.y + this.z*other.z;
     }
 
+    public Vec3 cross(Vec3 other) {
+        return new Vec3(
+                this.y*other.z - this.z*other.y,
+                this.z*other.x - this.x*other.z,
+                this.x*other.y - this.y*other.x
+        );
+    }
+
     public boolean nearZero() {
         double s = 1e-8;
         return (Math.abs(x) < s && Math.abs(y) < s && Math.abs(z) < s);

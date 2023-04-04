@@ -6,18 +6,24 @@ public class Camera {
     private Vec3 horizontal;
     private Vec3 vertical;
 
-    public Camera(double aspectRatio) {
-        double viewportHeight = 2.0;
-        double viewportWidth = aspectRatio * viewportHeight;
-        double focal_length = 1.0;
+    public Camera(Vec3 lookFrom, Vec3 lookAt, Vec3 vUp, double vFOV, double aspectRatio) {
+        double theta = Utils.degreesToRadians(vFOV);
+        double h = Math.tan(theta/2);
 
-        origin = new Vec3();
-        horizontal = new Vec3(viewportWidth, 0, 0);
-        vertical = new Vec3(0, viewportHeight, 0);
-        lowerLeftCorner = origin.sub(horizontal.div(2)).sub(vertical.div(2)).sub(new Vec3(0, 0, focal_length));
+        double viewportHeight = 2.0*h;
+        double viewportWidth = aspectRatio * viewportHeight;
+
+        Vec3 w = lookFrom.sub(lookAt).normalize();
+        Vec3 u = vUp.cross(w).normalize();
+        Vec3 v = w.cross(u);
+
+        origin = lookFrom;
+        horizontal = u.mul(viewportWidth);
+        vertical = v.mul(viewportHeight);
+        lowerLeftCorner = origin.sub(horizontal.div(2)).sub(vertical.div(2)).sub(w);
     }
 
-    public Ray getRay(double u, double v) {
-        return new Ray(origin, lowerLeftCorner.add(horizontal.mul(u)).add(vertical.mul(v)).sub(origin));
+    public Ray getRay(double s, double t) {
+        return new Ray(origin, lowerLeftCorner.add(horizontal.mul(s)).add(vertical.mul(t)).sub(origin));
     }
 }
