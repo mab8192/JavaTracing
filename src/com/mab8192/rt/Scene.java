@@ -23,7 +23,7 @@ public class Scene {
 
         for (Hittable obj : this.hittables) {
             Hit hit = obj.hit(r, t_min, closestSoFar);
-            if (hit.hit) {
+            if (hit.didHit) {
 
                 closestHit = hit;
                 closestSoFar = hit.t;

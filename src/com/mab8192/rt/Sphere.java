@@ -1,17 +1,26 @@
 package com.mab8192.rt;
 
-public class Sphere implements Hittable{
+public class Sphere extends Hittable{
     private Vec3 center;
     private double radius;
 
     public Sphere() {
+        super();
         this.center = new Vec3();
         this.radius = 1.0;
+        this.material = new Lambertian(Colors.WHITE);
     }
 
     public Sphere(Vec3 center, double radius) {
         this.center = center;
         this.radius = radius;
+        this.material = new Lambertian(Colors.WHITE);
+    }
+
+    public Sphere(Vec3 center, double radius, Material mat) {
+        this.center = center;
+        this.radius = radius;
+        this.material = mat;
     }
 
     @Override
@@ -35,11 +44,12 @@ public class Sphere implements Hittable{
         }
 
         Hit hit = new Hit();
-        hit.hit = true;
+        hit.didHit = true;
         hit.t = root;
         hit.p = r.at(hit.t);
         Vec3 outwardNormal = hit.p.sub(this.center).div(this.radius);
         hit.setFaceNormal(r, outwardNormal);
+        hit.material = this.material;
 
         return hit;
     }

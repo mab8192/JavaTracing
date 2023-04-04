@@ -19,11 +19,12 @@ public class Ray {
         }
         // Check if this ray hits and object in the scene
         Hit hit = scene.hit(this, 0.001, Utils.infinity);
-        if (hit.hit) {
-            Vec3 target = hit.p.add(hit.normal).add(Vec3.randomUnitVector());
-            Ray bounceRay = new Ray(hit.p, target.sub(hit.p));
-            Vec3 bounceColor = bounceRay.getColor(scene, depth-1);
-            return bounceColor.mul(0.5);
+        if (hit.didHit) {
+            ScatteredRay sr = hit.material.scatter(this, hit);
+            if (sr.valid) {
+                return sr.attenuation.mul(sr.ray.getColor(scene, depth-1));
+            }
+            return Colors.BLACK;
         }
 
         // Otherwise return a white-blue gradient along the y-axis

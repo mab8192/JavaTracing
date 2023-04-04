@@ -1,10 +1,11 @@
 package com.mab8192.rt;
 
 public class Hit {
-    public boolean hit = false;
+    public boolean didHit = false;
     public Vec3 p;
     public Vec3 normal;
     double t;
+    Material material;
 
     boolean frontFace;
 

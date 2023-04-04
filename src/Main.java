@@ -16,8 +16,17 @@ public class Main {
 
         // World
         Scene world = new Scene();
-        world.add(new Sphere(new Vec3(0, 0, -1), 0.5));
-        world.add(new Sphere(new Vec3(0, -100.5, -1), 100));
+
+        Material groundMaterial = new Lambertian(new Vec3(0.4, 0.8, 0.0));
+        Material centerMaterial = new Lambertian(new Vec3(0.9, 0.3, 0.3));
+        Material leftMaterial = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
+        Material rightMaterial = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
+
+        world.add(new Sphere(new Vec3(0, -100.5, -1), 100, groundMaterial));
+        world.add(new Sphere(new Vec3(0, 0, -1), 0.25, centerMaterial));
+        world.add(new Sphere(new Vec3(-1, 0, -1), 0.5, leftMaterial));
+        world.add(new Sphere(new Vec3(1, 0, -1), 0.5, rightMaterial));
+
 
         // Image
         PPMImage img = new PPMImage(width, height);

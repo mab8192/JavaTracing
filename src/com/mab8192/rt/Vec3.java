@@ -62,8 +62,18 @@ public class Vec3 {
         return this.x*other.x + this.y*other.y + this.z*other.z;
     }
 
+    public boolean nearZero() {
+        double s = 1e-8;
+        return (Math.abs(x) < s && Math.abs(y) < s && Math.abs(z) < s);
+    }
+
     public String toString() {
         return String.format("%f %f %f", x, y, z);
+    }
+
+    public static Vec3 reflect(Vec3 v, Vec3 n) {
+        // v - 2*dot(v,n)*n;
+        return v.sub(n.mul(2*v.dot(n)));
     }
 
     public static Vec3 random() {
