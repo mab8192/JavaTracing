@@ -76,6 +76,14 @@ public class Vec3 {
         return v.sub(n.mul(2*v.dot(n)));
     }
 
+    public static Vec3 refract(Vec3 v, Vec3 n, double eta_ratio) {
+        double cos_theta = Math.min(v.mul(-1).dot(n), 1.0);
+        Vec3 r_perp = v.add(n.mul(cos_theta)).mul(eta_ratio);
+        Vec3 r_parallel = n.mul(-Math.sqrt(Math.abs(1.0 - r_perp.magnitude_sq())));
+
+        return r_perp.add(r_parallel);
+    }
+
     public static Vec3 random() {
         return new Vec3(Utils.randomDouble(), Utils.randomDouble(), Utils.randomDouble());
     }

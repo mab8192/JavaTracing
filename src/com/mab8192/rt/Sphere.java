@@ -1,5 +1,8 @@
 package com.mab8192.rt;
 
+import com.mab8192.rt.material.Lambertian;
+import com.mab8192.rt.material.Material;
+
 public class Sphere extends Hittable{
     private Vec3 center;
     private double radius;

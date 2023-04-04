@@ -1,4 +1,8 @@
 import com.mab8192.rt.*;
+import com.mab8192.rt.material.Dielectric;
+import com.mab8192.rt.material.Lambertian;
+import com.mab8192.rt.material.Material;
+import com.mab8192.rt.material.Metal;
 
 import java.io.IOException;
 import java.util.Random;
@@ -8,8 +12,8 @@ public class Main {
         double aspectRatio = 16.0/9.0;
         int width = 400;
         int height = (int) (width / aspectRatio);
-        int samplesPerPixel = 100;
-        int numBounces = 100;
+        int samplesPerPixel = 200;
+        int numBounces = 10;
 
         // Camera
         Camera camera = new Camera(aspectRatio);
@@ -18,7 +22,7 @@ public class Main {
         Scene world = new Scene();
 
         Material groundMaterial = new Lambertian(new Vec3(0.4, 0.8, 0.0));
-        Material centerMaterial = new Lambertian(new Vec3(0.9, 0.3, 0.3));
+        Material centerMaterial = new Dielectric(1.5);
         Material leftMaterial = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
         Material rightMaterial = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
 

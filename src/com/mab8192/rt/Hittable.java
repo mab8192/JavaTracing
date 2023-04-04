@@ -1,5 +1,7 @@
 package com.mab8192.rt;
 
+import com.mab8192.rt.material.Material;
+
 public abstract class Hittable {
     public Material material;
 

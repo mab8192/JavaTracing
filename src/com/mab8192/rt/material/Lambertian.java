@@ -1,4 +1,9 @@
-package com.mab8192.rt;
+package com.mab8192.rt.material;
+
+import com.mab8192.rt.Hit;
+import com.mab8192.rt.Ray;
+import com.mab8192.rt.ScatteredRay;
+import com.mab8192.rt.Vec3;
 
 public class Lambertian extends Material{
     public Vec3 albedo;
