@@ -9,6 +9,7 @@ public class Main {
         int width = 400;
         int height = (int) (width / aspectRatio);
         int samplesPerPixel = 100;
+        int numBounces = 100;
 
         // Camera
         Camera camera = new Camera(aspectRatio);
@@ -33,7 +34,7 @@ public class Main {
                     double v = (j + rand.nextDouble())/height;
 
                     Ray r = camera.getRay(u, v);
-                    color = color.add(r.getColor(world));
+                    color = color.add(r.getColor(world, numBounces));
                 }
 
                 img.writeColor(color, samplesPerPixel);

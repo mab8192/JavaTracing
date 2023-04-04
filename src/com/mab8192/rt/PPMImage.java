@@ -12,9 +12,13 @@ public class PPMImage {
     }
 
     public void writeColor(Vec3 color, int samplesPerPixel) {
-        int r = (int)(color.x*255.999/samplesPerPixel);
-        int g = (int)(color.y*255.999/samplesPerPixel);
-        int b = (int)(color.z*255.999/samplesPerPixel);
+        // the scale and sqrt are for gamma correction (gamma 2)
+        double scale = 1.0/samplesPerPixel;
+        int r = (int)(Math.sqrt(scale * color.x)*255.999);
+        int g = (int)(Math.sqrt(scale * color.y)*255.999);
+        int b = (int)(Math.sqrt(scale * color.z)*255.999);
+
+        // gamma correction
         this.contents.append(String.format("%d %d %d\n", r, g, b));
     }
 

@@ -13,11 +13,17 @@ public class Ray {
         return new Vec3(origin.add(dir.mul(t)));
     }
 
-    public Vec3 getColor(Scene h) {
+    public Vec3 getColor(Scene scene, int depth) {
+        if (depth <= 0) {
+            return Colors.BLACK;
+        }
         // Check if this ray hits and object in the scene
-        Hit hit = h.hit(this, 0, Globals.infinity);
+        Hit hit = scene.hit(this, 0.001, Utils.infinity);
         if (hit.hit) {
-            return hit.normal.add(Colors.WHITE).div(2);
+            Vec3 target = hit.p.add(hit.normal).add(Vec3.randomUnitVector());
+            Ray bounceRay = new Ray(hit.p, target.sub(hit.p));
+            Vec3 bounceColor = bounceRay.getColor(scene, depth-1);
+            return bounceColor.mul(0.5);
         }
 
         // Otherwise return a white-blue gradient along the y-axis

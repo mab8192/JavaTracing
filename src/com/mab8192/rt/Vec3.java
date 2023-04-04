@@ -65,4 +65,33 @@ public class Vec3 {
     public String toString() {
         return String.format("%f %f %f", x, y, z);
     }
+
+    public static Vec3 random() {
+        return new Vec3(Utils.randomDouble(), Utils.randomDouble(), Utils.randomDouble());
+    }
+
+    public static Vec3 random(double min, double max) {
+        return new Vec3(Utils.randomDouble(min, max), Utils.randomDouble(min, max), Utils.randomDouble(min, max));
+    }
+
+    public static Vec3 randomInUnitSphere() {
+        while (true) {
+            Vec3 p = Vec3.random(-1, 1);
+            if (p.magnitude_sq() >= 1) continue;
+            return p;
+        }
+    }
+
+    public static Vec3 randomUnitVector() {
+        return randomInUnitSphere().normalize();
+    }
+
+    public static Vec3 randomInHemisphere(Vec3 normal) {
+        Vec3 unit = randomUnitVector();
+        if (unit.dot(normal) > 0) {
+            return unit;
+        } else {
+            return unit.mul(-1);
+        }
+    }
 }
