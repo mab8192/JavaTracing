@@ -120,4 +120,12 @@ public class Vec3 {
             return unit.mul(-1);
         }
     }
+
+    public static Vec3 randomInUnitDisk() {
+        while (true) {
+            Vec3 p = new Vec3(Utils.randomDouble(-1, 1), Utils.randomDouble(-1, 1), 0);
+            if (p.magnitude_sq() >= 1) continue;
+            return p;
+        }
+    }
 }
